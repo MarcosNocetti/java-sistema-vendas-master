@@ -5,6 +5,7 @@
  */
 package com.jdenner.gui;
 
+import java.sql.Connection;
 import javax.swing.JOptionPane;
 import com.jdenner.dao.Conexao;
 import java.sql.PreparedStatement;
@@ -21,8 +22,11 @@ import java.util.logging.Logger;
  */
         
 public class LoginT  extends javax.swing.JFrame  {
-    
-    Conexao con = new Conexao() ;
+    Connection con = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+
+    Conexao cond = new Conexao() ;
     public LoginT() throws Exception {
         initComponents();
         getRootPane().setDefaultButton(btnAcess);
@@ -135,28 +139,35 @@ public class LoginT  extends javax.swing.JFrame  {
         try{
             
             Conexao c;
-            try {
                 c = new Conexao();
-                String sql = "select * from tbfuncionario where nome='"+jUser.getText()+"'";
-                PreparedStatement ps = c.getConexao().prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();
+                String sql = "SELECT * FROM tbfuncionario Where nome = ? and password = ?";
+                preparedStatement = con.prepareStatement(sql);
+                preparedStatement.setString(1,jUser.getText());
+                preparedStatement.setString(1,jPassword.getText());
+
+                resultSet = preparedStatement.executeQuery();
 
 
-                if(rs.getString("nome").equals(jUser.getText())){
-                    Menu menu = new Menu();
-                    menu.setVisible(true);
-                    dispose();
-                }
-                else{
+                if (!resultSet.next()) {
+                     JOptionPane.showMessageDialog(rootPane, "senha ou usuario invalido");
+
+                } else {
                     JOptionPane.showMessageDialog(rootPane, "senha ou usuario invalido");
+                    Menu menu;
+                try {
+                    menu = new Menu();
+                    menu.setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(LoginT.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(LoginT.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                   
+                }
 
         }
         catch(SQLException ex){
             Logger.getLogger(LoginT.class.getName()).log(Level.SEVERE,null,ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginT.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAcessActionPerformed
 

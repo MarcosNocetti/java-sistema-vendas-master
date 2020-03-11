@@ -382,7 +382,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="lblUser">
           <Properties>
             <Property name="text" type="java.lang.String" value="User"/>
           </Properties>

@@ -1,6 +1,8 @@
 package com.jdenner;
 
 import com.jdenner.gui.LoginT;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -22,8 +24,14 @@ public class Principal {
     public static void main(String[] args) {
         lookAndFeel();
        
-            LoginT login = new LoginT();
+            LoginT login;
+        try {
+            login = new LoginT();
             login.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
     }
 
     private static void lookAndFeel() {

@@ -8,10 +8,12 @@ import java.util.logging.Logger;
  *
  */
 public class Menu extends javax.swing.JFrame {
-
-    public Menu() {
+    LoginT log;
+    public Menu () throws Exception {
+        this.log = new LoginT();
         initComponents();
-    }
+        lblUser.setText(log.jUser.getText());
+    }   
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -27,7 +29,7 @@ public class Menu extends javax.swing.JFrame {
         btSair = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         menuCadastros = new javax.swing.JMenu();
         miProduto = new javax.swing.JMenuItem();
@@ -173,9 +175,9 @@ public class Menu extends javax.swing.JFrame {
         desktopPane.add(jLabel1);
         jLabel1.setBounds(730, 590, 80, 40);
 
-        jLabel2.setText("User");
-        desktopPane.add(jLabel2);
-        jLabel2.setBounds(820, 594, 60, 30);
+        lblUser.setText("User");
+        desktopPane.add(lblUser);
+        lblUser.setBounds(820, 594, 60, 30);
 
         getContentPane().add(desktopPane, java.awt.BorderLayout.CENTER);
         desktopPane.getAccessibleContext().setAccessibleName("Despesas");
@@ -339,8 +341,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btVenda;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblUser;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuCadastros;
     private javax.swing.JMenu menuMovimentos;
